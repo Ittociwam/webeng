@@ -16,6 +16,7 @@ and open the template in the editor.
     <body>
                 <header>
             <?php 
+            print $_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php";
             include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php");
             ?>  
         </header>
