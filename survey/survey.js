@@ -118,7 +118,7 @@ function displayResults() {
 
                 jsonString = JSON.stringify(json);
                 $("#thanks").html(jsonString);
-                resultsStringdisplayResults(json);
+                resultsString = displayResults(json);
                     $("#results").html(resultsString);
             }
         });
