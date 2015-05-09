@@ -14,9 +14,14 @@ and open the template in the editor.
         <script src="survey.js"></script>
     </head>
     <body>
-        <h1>New Science/Technology Building Survey</h1>
+                <header>
+            <?php 
+            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php");
+            ?>  
+        </header>
+        <h1 class="white">New Science/Technology Building Survey</h1>
         <br/>
-        <form>
+        <form class="white">
             How many <a href="http://www.amazon.com/LG-Electronics-34-Inch-LED-Lit-34UC97-S/dp/B00OKSEWL6">  34 inch curved LED-backlit LCD monitors </a> should be set up at each linux lab station? <br/>
            2 <input type="radio" value ="2" name="monitors"/><br/>
            3 <input type="radio" value ="3" name="monitors"/><br/>
@@ -45,6 +50,6 @@ and open the template in the editor.
         </form>
         
         
-        <div id="results"></div>
+        <div class="white" id="results"></div>
     </body>
 </html>

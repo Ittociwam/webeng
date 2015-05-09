@@ -14,9 +14,12 @@ and open the template in the editor.
         <script src="survey.js"></script>
     </head>
     <body>
+            <?php 
+            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php");
+            ?>  
         
-        <div id="results"></div>
-        <h3>Thank you for completing our survey!</h3>
+        <div class = "white" id="results"></div>
+        <h3 class="white" >Thank you for completing our survey!</h3>
         <a href="http://php-biset.rhcloud.com/">Return Home</a>
     </body>
 </html>

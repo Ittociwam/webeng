@@ -9,7 +9,7 @@ h1 {
     text-align: center;
 }
 
-a.white {
+.home.white {
     width: 50%;
     float: right;
     font-family: sans-serif;
@@ -24,6 +24,8 @@ a.white:visited {
 }
 
 .white{
+    font-family: san-serif;
+    font-size: 1.23em;
     background: rgba(255, 255, 255, .3);
 }
 

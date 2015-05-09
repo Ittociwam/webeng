@@ -111,7 +111,6 @@ function saveQuiz(quizString) {
             console.log("success in saveQuiz");
             localStorage.setItem("survey", "taken");
             JSON.stringify(response);
-            window.alert("here");
             sayThankYou(quizString);
 
         }
@@ -120,8 +119,8 @@ function saveQuiz(quizString) {
 
 function sayThankYou() {
 
-    if (getCurrentPage() !== "thanks.html")
-        window.location.replace('thanks.html');
+    if (getCurrentPage() !== "thanks.php")
+        window.location.replace('thanks.php');
 
     displayResults();
 }

@@ -18,7 +18,7 @@
 
         <img id="myImage" src="media/image3013.png" alt="thing"/> 
 
-            <a id="assignments" class="white" href="assignments.php"> Other Assignments </a>
+            <a id="assignments" class="home white" href="assignments.php"> Other Assignments </a>
 
     </body>
 </html>
