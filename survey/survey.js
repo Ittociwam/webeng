@@ -106,7 +106,8 @@ function sayThankYou() {
         displayResults();   
 }
 
-function displayResults(json) {
+function displayResults() {
+    var url = "getSurvey.php"
             $.ajax({
             url: url,
             dataType: 'json',
