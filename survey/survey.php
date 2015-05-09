@@ -16,9 +16,9 @@ and open the template in the editor.
     <body>
                 <header>
             <?php 
-            print $_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php";
+            print $_SERVER['DOCUMENT_ROOT'] . "modules/header.php";
             print dirname(__FILE__) . "/modules/header.php";
-            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php");
+            include($_SERVER['DOCUMENT_ROOT'] . "modules/header.php");
             include(dirname(__FILE__) . "/modules/header.php");  
             ?>  
         </header>
