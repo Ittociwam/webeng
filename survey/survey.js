@@ -108,6 +108,7 @@ function sayThankYou() {
 
 function displayResults() {
     var url = "getSurvey.php"
+    var resultsString
             $.ajax({
             url: url,
             dataType: 'json',
@@ -117,11 +118,11 @@ function displayResults() {
 
                 jsonString = JSON.stringify(json);
                 $("#thanks").html(jsonString);
-                displayResults(json);
+                resultsStringdisplayResults(json);
+                    $("#results").html(resultsString);
             }
         });
-    var resultsString = getDispalyQuiz(json);
-    $("#results").html(resultsString);
+
 }
 
 function getDispalyQuiz(results) {
