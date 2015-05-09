@@ -102,15 +102,12 @@ function sayThankYou() {
 
     if (getCurrentPage() !== "thanks.html")
         window.location.replace('thanks.html');
-    if (arguments[0]) {
-        results = JSON.stringify(arguments[0]);
-        $("#thanks").html(results);
-        displayResults(arguments[0]);
-    }
-    else {
-        url = "getSurvey.php";
-        var jsonString;
-        $.ajax({
+    
+        displayResults();   
+}
+
+function displayResults(json) {
+            $.ajax({
             url: url,
             dataType: 'json',
             contentType: 'application/json; charset=UTF-8',
@@ -122,12 +119,8 @@ function sayThankYou() {
                 displayResults(json);
             }
         });
-    }
-}
-
-function displayResults(json) {
-    var thanks = getDispalyQuiz(json);
-    $("#thanks").html(thanks);
+    var resultsString = getDispalyQuiz(json);
+    $("#results").html(resultsString);
 }
 
 function getDispalyQuiz(results) {
