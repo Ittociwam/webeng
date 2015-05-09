@@ -42,6 +42,26 @@ $(document).ready(function () {
 
 
     });
+
+    $("#display").click(function () {
+        
+        if($(this).hasClass('displaying'))
+        {
+         $("#results").html("");
+        $("#display").html('Display Survey Results');
+        $(this).removeClass('displaying');
+        console.log(this);
+        }
+        else
+        {
+        displayResults();
+        $("#display").html('Hide Results');
+        $(this).addClass('displaying');
+        console.log(this);
+        }
+
+    });
+
 });
 
 function updateQuiz(results, response) {
@@ -102,30 +122,28 @@ function sayThankYou() {
 
     if (getCurrentPage() !== "thanks.html")
         window.location.replace('thanks.html');
-    
-        displayResults();   
+
+    displayResults();
 }
 
 function displayResults() {
-    var url = "getSurvey.php"
-    var resultsString
-            $.ajax({
-            url: url,
-            dataType: 'json',
-            contentType: 'application/json; charset=UTF-8',
-            type: 'POST',
-            success: function (json) {
+    var url = "getSurvey.php";
+    var resultsString;
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        contentType: 'application/json; charset=UTF-8',
+        type: 'POST',
+        success: function (json) {
 
-                jsonString = JSON.stringify(json);
-                $("#thanks").html(jsonString);
-                resultsString = displayResults(json);
-                    $("#results").html(resultsString);
-            }
-        });
+            resultsString = getDisplayQuiz(json);
+            $("#results").html(resultsString);
+        }
+    });
 
 }
 
-function getDispalyQuiz(results) {
+function getDisplayQuiz(results) {
     var quizString = "<h1> " + results.name + " Results </h1>";
 
     results.questions.forEach(function (question) {
@@ -135,22 +153,19 @@ function getDispalyQuiz(results) {
                 quizString += displayVotes(question, "Number of Monitors");
                 break;
             case "drinks":
-               quizString += displayVotes(question, "Type of Drinks");
-
+                quizString += displayVotes(question, "Type of Drinks");
                 break;
             case "snacks":
                 quizString += displayVotes(question, "Type of Snacks");
-
                 break;
             case "transport":
                 quizString += displayVotes(question, "Type of Transport");
-
                 break;
             default:
                 console.log("error!!!!!");
         }
     });
-return quizString;
+    return quizString;
 }
 
 function displayVotes(question, title, quizString)
@@ -158,7 +173,7 @@ function displayVotes(question, title, quizString)
     var questionString = "<h2>" + title + "</h2>";
     responses = question.responses;
     responses.forEach(function (resp) {
-       questionString += resp.title + ": " + resp.numVotes + "<br/>";
+        questionString += resp.title + ": " + resp.numVotes + "<br/>";
     });
     return questionString;
 }

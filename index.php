@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <h1 class="white"> Web EngineeringII Home Page </h1>
+        <h1 class="white"> Web Engineering II Home Page </h1>
         <header>
             <?php include(dirname(__FILE__) . "/modules/header.php"); ?>  
         </header>
