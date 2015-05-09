@@ -15,7 +15,8 @@ and open the template in the editor.
     </head>
     <body>
             <?php 
-            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php");
+            include($_SERVER['DOCUMENT_ROOT'] . "modules/header.php"); //path for openshift
+            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php"); //path for localhost
             ?>  
         
         <div class = "white" id="results"></div>

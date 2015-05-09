@@ -16,10 +16,8 @@ and open the template in the editor.
     <body>
                 <header>
             <?php 
-            print $_SERVER['DOCUMENT_ROOT'] . "modules/header.php";
-            print dirname(__FILE__) . "/modules/header.php";
-            include($_SERVER['DOCUMENT_ROOT'] . "modules/header.php");
-            include(dirname(__FILE__) . "/modules/header.php");  
+            include($_SERVER['DOCUMENT_ROOT'] . "modules/header.php"); //path for openshift
+            include($_SERVER['DOCUMENT_ROOT'] . "webengii/webengII/modules/header.php"); //path for localhost
             ?>  
         </header>
         <h1 class="white">New Science/Technology Building Survey</h1>
