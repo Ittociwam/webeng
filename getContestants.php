@@ -3,7 +3,7 @@
 
 $dbuser = 'ironmanSelect';
 $dbPass = '';
-$dbHost = '%';
+$dbHost = '127.8.145.130';
 $dbName = 'ironman';
 
 $semester = $_POST['semester'];
