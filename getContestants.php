@@ -1,9 +1,9 @@
 
 <?php
 
-$dbuser = 'aNewUser';
-$dbPass = 'password';
-$dbHost = '127.0.0.1';
+$dbuser = 'ironmanSelect';
+$dbPass = '';
+$dbHost = '%';
 $dbName = 'ironman';
 
 $semester = $_POST['semester'];
