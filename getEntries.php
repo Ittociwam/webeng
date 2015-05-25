@@ -5,7 +5,7 @@ $dbPass = '';
 $dbHost = '127.8.145.130';
 $dbName = 'ironman';
 
-$semester = $_POST['semester'];
+$semester = $_POST['semester1'];
 $fname = $_POST["fname"];
 $lname = $_POST["lname"];
 
