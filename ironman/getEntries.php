@@ -10,11 +10,10 @@ if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
     $dbPass = 'password';
     $dbHost = '127.0.0.1';
 }
-$dbName = 'ironman';
+$dbName = 'iron_man';
 
 $semester = $_POST['semester'];
-$fname = $_POST["fname"];
-$lname = $_POST["lname"];
+$id = $_POST["id"];
 
 try {
     $db = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbuser, $dbPass);

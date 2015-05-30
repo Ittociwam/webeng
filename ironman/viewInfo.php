@@ -58,25 +58,9 @@
             </div>
         </div>
         <div class="well row"> 
-            <h2> Get all entries and progress level for a specific contestant</h2>
-            <h2><small>Set semester and event in the above box</small></h2>
+            <h2> Get your entries and progress level for any semester</h2>
 
             <form role="form">
-                <div class="form-group">
-                    <label for="contestant">First Name:
-                        <input type="text" class="form-control" id="fname"/>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="contestant">Last Name:
-                        <input type="text" class="form-control" id="lname"/>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email
-                        <input type="text" class="form-control" id="email"/>
-                    </label>
-                </div>
                 <div class=" form-group">
                     <label for="semester"> Semester: </label>
                     <select class="form-control" id="semester1">

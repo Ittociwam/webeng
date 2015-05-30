@@ -1,44 +1,52 @@
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor. master
  */
 
 
 
 function getEntries() {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "getEntries.php";
-    var postData = "semester=" + document.getElementById("semester1").value
-            + "&fname=" + document.getElementById("fname").value + "&lname=" +
-            document.getElementById("lname").value +
-            "&email=" + document.getElementById("email").value;
+    if (!localStorage.getItem("user")) {
+        entriesError("You have not yet submitted any entries on this machine.");
+    }
+    else {
+        var xmlhttp = new XMLHttpRequest();
+        var url = "getEntries.php";
+        var postData = "semester=" + document.getElementById("semester1").value
+                + "&fname=" + document.getElementById("fname").value;
 
 
-    xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-           console.log(xmlhttp.responseText);
-            var data = JSON.parse(xmlhttp.responseText);
-            displayEntries(data);
-        }
-    };
-    xmlhttp.open("POST", url, true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText);
+                var data = JSON.parse(xmlhttp.responseText);
+                displayEntries(data);
+            }
+        };
+        xmlhttp.open("POST", url, true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 //xmlhttp.setRequestHeader("Content-length", postData.length);
 //xmlhttp.setRequestHeader("Connection", "close");
-    xmlhttp.send(postData);
+        xmlhttp.send(postData);
+    }
+}
+
+function entriesError(message) {
+    document.getElementById("entryResults").innerHTML = message;
 }
 
 
 function getContestants() {
-
     var xmlhttp = new XMLHttpRequest();
     var url = "getContestants.php";
     var postData = "semester=" + document.getElementById("semester").value;
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            console.log(xmlhttp.responseText);
             var data = JSON.parse(xmlhttp.responseText);
+
             displayContestants(data);
         }
     };
@@ -56,18 +64,22 @@ function displayContestants(data) {
     if (data.length != 0) {
         var semester = getSemester(document.getElementById("semester").value);
         out = "<h2>Students registered for the Lazy Man Iron Man </br> <small> " + semester + "</small></h2>";
-        out += "<table id='table1' class='tablesorter table table-striped'><thead>\n\
-               <tr> <th> First Name </th> <th> Last Name </th> <th> Email </th> <th> Percentage Complete </th> \n\
-               </tr> </thead> <tbody>";
+        out += "<table id='table1' class='tablesorter table table-striped'>\n\
+                    <thead>\n\
+               <tr> <th> User Name </th> <th> Date Registered </th> <th> Percentage Complete </th> </tr>\n\
+                    </thead>\n\
+                        <tbody>";
         for (var i = 0; i < data.length; i++) {
-            out += "<tr> <td>" +
-                    data[i].fname + "</td>" +
-                    "<td>" + data[i].lname + "</td>"
-                    + "<td>" + data[i].email + "</td>\n\
-    <td>" + Math.floor(data[i].percentage * 100) + "%</td></tr>";
+            var username = "No Username";
+            if (data[i].u_name != null)
+                username = data[i].u_name;
+            out += "<tr> \n\
+                        <td>" + username + "</td>" +
+                       "<td>" + data[i].date + "</td>\n\
+                        <td>" + Math.floor(data[i].percentage * 100) + "%</td></tr>"; 
         }
-        out + "</tbody></table>";
-
+                out + "</tbody>\n\
+                    </table>";
     }
 
     document.getElementById("contestantResults").innerHTML = out;
@@ -89,14 +101,17 @@ function displayContestants(data) {
 function displayEntries(data) {
     var out = "No Entries"
     if (data.length != 0) {
+        var username = "No Username";
+        if (data[i].u_name != null)
+            username = data[i].u_name;
         var semester = getSemester(data[0].semester);
-        out = "<h2>Entries For " + data[0].lname + ", " + data[0].fname + "</h2>";
+        out = "<h2>Entries For " + username + "</h2>";
         out += "<table id='table2' class='tablesorter table table-striped'><thead>\n\
-               <tr> <th> Name </th> <th> Date  </th> <th> Action </th> \n\
+               <tr> <th> User Name </th> <th> Date  </th> <th> Action </th> \n\
                </tr> </thead> <tbody>";
         for (var i = 0; i < data.length; i++) {
             date = new Date(data[i].date);
-            out += "<tr> <td>" + data[i].fname + " " + data[i].lname + "</td>" +
+            out += "<tr> <td>" + username + "</td>" +
                     "<td>" + date.toLocaleDateString() + "</td>"
                     + "<td>" + getAction(data[i]) + "</td></tr>";
         }

@@ -10,18 +10,16 @@ if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
     $dbPass = 'password';
     $dbHost = '127.0.0.1';
 }
-$dbName = 'ironman';
+$dbName = 'iron_man';
 
 $semester = $_POST['semester'];
-//$semester = $_GET["semester"];
-//$event = $_GET["event"];
 
 try {
     $db = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbuser, $dbPass);
-    #$db.setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $query = " SELECT c.fname, c.lname, c.email, (sum(en.distance) / 223) as percentage
+    $query = "SELECT c.u_name, c.date, (sum(en.distance) / 223) as percentage
  FROM entries en
  INNER JOIN events e
  ON en.fk_events = e.pk_events_id
@@ -29,7 +27,7 @@ try {
  ON c.pk_contestants_id = en.fk_contestants
  WHERE e.semester = '" . $semester . "'
  AND en.fk_events = (SELECT pk_events_id from events where semester = '" . $semester . "')
- group by c.lname, c.fname, c.email;";
+ group by c.u_name, c.date;";
 
     $stmt = $db->query($query);
     $rows = array();
