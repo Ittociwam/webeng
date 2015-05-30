@@ -8,6 +8,6 @@
 <h1 class="white">Assignments</h1>
 <a class="white" href="survey/survey.php"> Click here to take a survey for the new Science/Technology Building! </a>
 <br/>
-<a class="white" href="accessDB.html"> Show Rankings for Lazy Man Ironman and see all entries for contestants. </a>
+<a class="white" href="ironman/accessDB.html"> Show Rankings for Lazy Man Ironman and see all entries for contestants. </a>
 
 ></html>

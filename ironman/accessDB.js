@@ -9,7 +9,7 @@
 function getEntries() {
     var xmlhttp = new XMLHttpRequest();
     var url = "getEntries.php";
-    var postData = "semester=" + document.getElementById("semester").value
+    var postData = "semester=" + document.getElementById("semester1").value
             + "&fname=" + document.getElementById("fname").value + "&lname=" +
             document.getElementById("lname").value +
             "&email=" + document.getElementById("email").value;
@@ -17,6 +17,7 @@ function getEntries() {
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+           console.log(xmlhttp.responseText);
             var data = JSON.parse(xmlhttp.responseText);
             displayEntries(data);
         }
@@ -55,7 +56,6 @@ function displayContestants(data) {
     if (data.length != 0) {
         var semester = getSemester(document.getElementById("semester").value);
         out = "<h2>Students registered for the Lazy Man Iron Man </br> <small> " + semester + "</small></h2>";
-        console.log(data.length);
         out += "<table id='table1' class='tablesorter table table-striped'><thead>\n\
                <tr> <th> First Name </th> <th> Last Name </th> <th> Email </th> <th> Percentage Complete </th> \n\
                </tr> </thead> <tbody>";
