@@ -25,20 +25,29 @@ try {
     $db = new PDO("mysql:host=$dbHost;dbname=$dbname", $dbuser, $dbPass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    //check and see if the event/semester is open for submitting entries
     $getSemester = "SELECT * FROM events "
             . "WHERE CURDATE() BETWEEN start_date AND end_date;";
     $getSemesterStatement = $db->query($getSemester);
     $getSemesterStatement->setFetchMode(PDO::FETCH_ASSOC);
     $semester = $getSemesterStatement->fetch();
-
+    //if the query returns nothing
     if ($semester == null) {
+        //there is no ironman compitition currently in progress
         echo '{"code":1, "message": "Currently there is no ironman competition in progress. '
         . 'Check with the activities office to find out when the next one starts!"}';
-    } else if ($date < $semester['start_date'] && $date > $semester['end_date']) {
+        //if the date they are trying to submit for is outside of the current semesters open period
+    } else if ($date < $semester['start_date'] || $date > $semester['end_date']) {
+        //tell them!
         echo '{"code":1, "message": "Your entry date is invalid for ' . $semester['semester'] . '."}';
-    } else {
+    } 
+    // here i want to check if the user has passed any distance limits I will probably call getEntries.php to do this
+    
+    else {
 
         $pk_events_id = $semester['pk_events_id'];
+        
+        // check if the user has a registration for the event they are submitting for
         $checkRegistration = "SELECT * from registration"
                 . " WHERE fk_contestants = $user"
                 . " AND fk_events = $pk_events_id;";
@@ -47,6 +56,7 @@ try {
         $checkRegistrationStatement->setFetchMode(PDO::FETCH_ASSOC);
         $registration = $checkRegistrationStatement->fetch();
 
+        // if they don't, register them for it!
         if ($registration == null) {
             $insertRegistration = "INSERT INTO registration(fk_contestants, fk_events)"
                     . "VALUES(:user, :event)";
@@ -57,6 +67,8 @@ try {
             $regStatement->execute();
         }
 
+        // get the correct mode id for the mode they entered
+        // move this to javascript when you get time
         $modeNum = 0;
         switch ($mode) {
             case "Bike":
@@ -70,7 +82,8 @@ try {
                 break;
         }
 
-        $query = "INSERT INTO entries (date, distance, fk_events, fk_contestants, fk_mode)
+        //finally if all else is ok, go ahead and bulid the query
+        $query = "INSERT INTO entries (entry_date, distance, fk_events, fk_contestants, fk_mode)
  VALUES(:date, :distance, :semester, :user, :modeNum);";
 
 
@@ -81,11 +94,12 @@ try {
         $statement->bindValue(':user', $user);
         $statement->bindValue(':modeNum', $modeNum);
         $message = "";
+        // and execute it!
         if ($statement->execute()) {
             print '{"code" : 0, "message": "Good Job! You are well on your way to being an ironman champion!"}';
         }
     }
 } catch (PDOEXCEPTION $ex) {
-    echo '{"code":1, "message": "There was an error in the database: "' . $ex .'"';
+    echo '{"code":1, "message": "There was an error in the database: "' . $ex . '"';
 }
 ?>

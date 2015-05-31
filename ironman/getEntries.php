@@ -20,7 +20,7 @@ try {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $query = " select * from entries e
+    $query = "select * from entries e
  inner join contestants c
  on e.fk_contestants = c.pk_contestants_id
  inner join events ev

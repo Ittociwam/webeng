@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-
+//jquery stuff
 $(document).ready(function () {
     //initialize date picker
     $('#entryDate').datepicker({
-        format: "yyyy/mm/dd" //mysql format
+        format: "yyyy-mm-dd" //mysql format
     });
 
     //initilize modal to not shown
@@ -37,6 +37,7 @@ $(document).ready(function () {
 
 });
 
+//builds the url and sends it with ajax to my newEntry.php file
 function submitEntry() {
     var url = "newEntry.php?";
     url += "mode=" + $('#mode').val();
@@ -50,11 +51,13 @@ function submitEntry() {
         var parsedData = JSON.parse(data);
         console.log("pasred json from submit entry" + parsedData.message);
         $('#finishedModal').modal('show');
+        // if the return code is  0 everything is ok. 
         if (parsedData.code != 0)
         {
             $('#finishedTitle').text("Something went wrong...");
             $('#finishedBody').text(parsedData.message);
         }
+        //otherwise we get a user friendly message of what the issue was. 
         else
         {
             $('#finishedTitle').text("Your entry was successful!");
@@ -64,23 +67,25 @@ function submitEntry() {
     });
 }
 
-
+// check if the user already is in our system.
 function validateUser() {
     // if browser finds no local storage for user
     if (!localStorage.getItem("user"))
     {
         // prompt for a user name
-        console.log("didn't find a user in validateUser")
+        console.log("didn't find a user in validateUser");
         $('#unameModal').modal('show');
     }
     else {
-        console.log("found a user in validate user submitting entry...")
+        console.log("found a user in validate user submitting entry...");
         submitEntry();
     }
 
 
 }
 
+// if a user is not found in the system, this function gets called by an onclick event
+//from the modal that promps for a username.
 function createNewUser(username) {
     console.log("create new user called.");
     console.log("username in createNewUser(): " + document.getElementById('userName').value);

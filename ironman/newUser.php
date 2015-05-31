@@ -27,13 +27,14 @@ try {
     $db = new PDO("mysql:host=$dbHost;dbname=$dbname", $dbuser, $dbPass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    //determine if the user has specified a display name or not
     if (!isset($username)) {
-        $query = "INSERT INTO contestants (date)
+        $query = "INSERT INTO contestants (register_date)
  VALUES(CURDATE());";
     } 
     
     else {
-        $query = "INSERT INTO contestants (date, u_name)
+        $query = "INSERT INTO contestants (register_date, u_name)
  VALUES(CURDATE(), :username);";
     }
 

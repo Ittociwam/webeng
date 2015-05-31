@@ -19,7 +19,7 @@ try {
      $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-    $query = "SELECT c.u_name, c.date, (sum(en.distance) / 223) as percentage
+    $query = "SELECT c.u_name, c.register_date, (sum(en.distance) / 223) as percentage
  FROM entries en
  INNER JOIN events e
  ON en.fk_events = e.pk_events_id
@@ -27,7 +27,7 @@ try {
  ON c.pk_contestants_id = en.fk_contestants
  WHERE e.semester = '" . $semester . "'
  AND en.fk_events = (SELECT pk_events_id from events where semester = '" . $semester . "')
- group by c.u_name, c.date;";
+ group by c.u_name, c.register_date;";
 
     $stmt = $db->query($query);
     $rows = array();

@@ -75,7 +75,7 @@ function displayContestants(data) {
                 username = data[i].u_name;
             out += "<tr> \n\
                         <td>" + username + "</td>" +
-                       "<td>" + data[i].date + "</td>\n\
+                       "<td>" + data[i].register_date + "</td>\n\
                         <td>" + Math.floor(data[i].percentage * 100) + "%</td></tr>"; 
         }
                 out + "</tbody>\n\
@@ -110,7 +110,7 @@ function displayEntries(data) {
                <tr> <th> User Name </th> <th> Date  </th> <th> Action </th> \n\
                </tr> </thead> <tbody>";
         for (var i = 0; i < data.length; i++) {
-            date = new Date(data[i].date);
+           var date = new Date(data[i].entry_date);
             out += "<tr> <td>" + username + "</td>" +
                     "<td>" + date.toLocaleDateString() + "</td>"
                     + "<td>" + getAction(data[i]) + "</td></tr>";

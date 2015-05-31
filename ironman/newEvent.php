@@ -8,11 +8,11 @@
         <script>
             $(document).ready(function () {
                 $('#start_date').datepicker({
-                    format: "yyyy/mm/dd"
+                    format: "yyyy-mm-dd" // initilize the dates to sql format
                 });
 
                 $('#end_date').datepicker({
-                    format: "yyyy/mm/dd"
+                    format: "yyyy-mm-dd"
                 });
             });
         </script>
