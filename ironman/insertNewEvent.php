@@ -5,7 +5,6 @@
  */
 
 if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
-    echo "openshift";
     $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
     $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
     $dbuser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');

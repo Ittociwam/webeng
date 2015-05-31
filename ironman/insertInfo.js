@@ -99,7 +99,7 @@ function createNewUser(username) {
         }
         else
         {
-            console.log(" error: data in create new user" + data);
+            console.log(" error: data in create new user " + data);
             return false;
         }
     });
