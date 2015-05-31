@@ -27,8 +27,7 @@ try {
  on e.fk_events = ev.pk_events_id
  inner join mode m
  on e.fk_mode = m.pk_mode_id
- WHERE c.fname= '" . $fname . "'
- AND c.lname = '" . $lname . "'
+ WHERE c.pk_contestants_id= '" . $id . "'
  AND ev.semester = '" . $semester . "'";
     $stmt = $db->query($query);
     $rows = array();

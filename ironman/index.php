@@ -22,14 +22,19 @@ and open the template in the editor. I am in a new branch????????
     <body>
         <div class="container">
             <div class="row vertical-center-row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="row">
-                        <div class="col-md-offset-3 col-md-6"><button onclick="parent.location = 'viewInfo.php'" type="button" class="btn btn-primary btn-lg"> Show info form database </button></div>
+                        <div class="col-md-offset-3 col-md-6"><button onclick="parent.location = 'viewInfo.php'" type="button" class="btn btn-primary btn-lg"> Get Entries and Rankings </button></div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="row">
-                        <div class="col-md-offset-3 col-md-6"><button onclick="parent.location = 'insertInfo.php'" type="button" class="btn btn-primary btn-lg"> Insert info into database </button></div>
+                        <div class="col-md-offset-3 col-md-6"><button onclick="parent.location = 'insertInfo.php'" type="button" class="btn btn-primary btn-lg"> Insert Entry </button></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-6"><button onclick="parent.location = 'newEvent.php'" type="button" class="btn btn-primary btn-lg"> Create Event (Admin only) </button></div>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ function getEntries() {
         var xmlhttp = new XMLHttpRequest();
         var url = "getEntries.php";
         var postData = "semester=" + document.getElementById("semester1").value
-                + "&fname=" + document.getElementById("fname").value;
+                + "&id=" + localStorage["user"];
 
 
         xmlhttp.onreadystatechange = function () {
@@ -102,10 +102,10 @@ function displayEntries(data) {
     var out = "No Entries"
     if (data.length != 0) {
         var username = "No Username";
-        if (data[i].u_name != null)
-            username = data[i].u_name;
+        if (data[0].u_name != null)
+            username = data[0].u_name;
         var semester = getSemester(data[0].semester);
-        out = "<h2>Entries For " + username + "</h2>";
+        out = "<h2>Entries For " + username + " for " + semester + "</h2>";
         out += "<table id='table2' class='tablesorter table table-striped'><thead>\n\
                <tr> <th> User Name </th> <th> Date  </th> <th> Action </th> \n\
                </tr> </thead> <tbody>";
