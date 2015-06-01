@@ -110,7 +110,7 @@ function displayEntries(data) {
                <tr> <th> User Name </th> <th> Date  </th> <th> Action </th> \n\
                </tr> </thead> <tbody>";
         for (var i = 0; i < data.length; i++) {
-           var date = new Date(data[i].entry_date);
+           var date = new Date(data[i].entry_date + "T00:00:00-07:00");
             out += "<tr> <td>" + username + "</td>" +
                     "<td>" + date.toLocaleDateString() + "</td>"
                     + "<td>" + getAction(data[i]) + "</td></tr>";
