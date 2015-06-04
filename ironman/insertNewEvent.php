@@ -3,26 +3,13 @@
  * This file will handle a new iron man event entry. Only the admins should be able to use this
  * 
  */
-
-if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
-    $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
-    $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
-    $dbuser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
-    $dbPass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
-} else { // localhost
-    $dbuser = 'insertIronman';
-    $dbPass = 'password';
-    $dbHost = '127.0.0.1';
-}
-$dbname = 'iron_man';
+require 'connectfile.php';
 try {
     $semester = $_GET['season'] . $_GET['year'];
     $start_date = $_GET['start_date'];
     $end_date = $_GET['end_date'];
 
     //YOU ARE HERE!
-    $db = new PDO("mysql:host=$dbHost;dbname=$dbname", $dbuser, $dbPass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query = "INSERT INTO events (semester, start_date, end_date)
  VALUES(:semester, :start_date, :end_date);";

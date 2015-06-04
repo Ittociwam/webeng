@@ -5,25 +5,12 @@
  * 
  */
 
-if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
-    $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
-    $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
-    $dbuser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
-    $dbPass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
-} else { // localhost
-    $dbuser = 'insertIronman';
-    $dbPass = 'password';
-    $dbHost = '127.0.0.1';
-}
-$dbname = 'iron_man';
+require 'connectfile.php';
 try {
     $mode = $_GET['mode'];
     $distance = $_GET['distance'];
     $date = $_GET['date'];
     $user = $_GET['user'];
-
-    $db = new PDO("mysql:host=$dbHost;dbname=$dbname", $dbuser, $dbPass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //check and see if the event/semester is open for submitting entries
     $getSemester = "SELECT * FROM events "
@@ -40,13 +27,12 @@ try {
     } else if ($date < $semester['start_date'] || $date > $semester['end_date']) {
         //tell them!
         echo '{"code":1, "message": "Your entry date is invalid for ' . $semester['semester'] . '."}';
-    } 
+    }
     // here i want to check if the user has passed any distance limits I will probably call getEntries.php to do this
-    
     else {
 
         $pk_events_id = $semester['pk_events_id'];
-        
+
         // check if the user has a registration for the event they are submitting for
         $checkRegistration = "SELECT * from registration"
                 . " WHERE fk_contestants = $user"

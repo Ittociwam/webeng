@@ -7,22 +7,7 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <?php
-        if (getenv('OPENSHIFT_MYSQL_DB_HOST')) {
-            echo '<script type="text/javascript" src="/tablesorter-master/js/jquery.tablesorter.js"></script> 
-        <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
-        <script src="/tablesorter-master/js/jquery.tablesorter.widgets.js"></script>
-        <link rel="stylesheet" href="/tablesorter-master/css/theme.blue.css"/>
-        <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>        <script type="text/javascript" src="/bootstrap/js/bootstrap-datepicker.js"></script>
-        <link rel="stylesheet" href="/bootstrap/css/datepicker.css"/>';
-        } else {
-            echo '<script type="text/javascript" src="/webengii/webengii/tablesorter-master/js/jquery.tablesorter.js"></script> 
-        <link rel="stylesheet" type="text/css" href="/webengii/webengii/bootstrap/css/bootstrap.min.css"/>
-        <script src="/webengii/webengii/tablesorter-master/js/jquery.tablesorter.widgets.js"></script>
-        <link rel="stylesheet" href="/webengii/webengii/tablesorter-master/css/theme.blue.css"/>
-        <script type="text/javascript" src="/webengii/webengii/bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript" src="/webengii/webengii/bootstrap/js/bootstrap-datepicker.js"></script>
-        <link rel="stylesheet" href="/webengii/webengii/bootstrap/css/datepicker.css"/>';
-        }
+        require 'links.php';
         ?>
         <script src="insertInfo.js"></script>
 
@@ -58,46 +43,46 @@
             </div>
         </div>
 
-            <!-- Modals -->
+        <!-- Modals -->
 
-            <div id="unameModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Your device is not in our system! Would you like a Username?</h4>
+        <div id="unameModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Your device is not in our system! Would you like a Username?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class=" form-group col-lg-12">
+                            <input id='userName' type="text" placeholder='Enter a Username here.' class="form-control" >
                         </div>
-                        <div class="modal-body">
-                            <div class=" form-group col-lg-12">
-                                <input id='userName' type="text" placeholder='Enter a Username here.' class="form-control" >
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" onclick='createNewUser(null)' class=" modalSubmit btn btn-default" data-dismiss="modal">I'm OK with being just an ID number</button>
-                            <button type="button" onclick='createNewUser($("#userName").val())' data-dismiss="modal" class=" modalSubmit btn btn-primary">Sure</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick='createNewUser(null)' class=" modalSubmit btn btn-default" data-dismiss="modal">I'm OK with being just an ID number</button>
+                        <button type="button" onclick='createNewUser($("#userName").val())' data-dismiss="modal" class=" modalSubmit btn btn-primary">Sure</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-            <div id="finishedModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close"  data-dismiss="modal">&times;</button>
-                            <h4 id='finishedTitle' class="modal-title">There was a problem...</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p id="finishedBody"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href='viewInfo.php'> <button type="button" class="btn btn-default" >Go to rankings</button> </a>
-                            <button type="button" class="btn btn-default" id='endButton' data-dismiss="modal">Insert another entry</button>
-                        </div>
+        <div id="finishedModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close"  data-dismiss="modal">&times;</button>
+                        <h4 id='finishedTitle' class="modal-title">There was a problem...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="finishedBody"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href='viewInfo.php'> <button type="button" class="btn btn-default" >Go to rankings</button> </a>
+                        <button type="button" class="btn btn-default" id='endButton' data-dismiss="modal">Insert another entry</button>
                     </div>
                 </div>
             </div>
+        </div>
 
     </body>
 </html>

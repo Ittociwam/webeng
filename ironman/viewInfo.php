@@ -7,33 +7,9 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <?php
-        if (getenv('OPENSHIFT_MYSQL_DB_HOST')) {
-            echo '<script type="text/javascript" src="/tablesorter-master/js/jquery.tablesorter.js"></script> 
-        <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
-        <script src="/tablesorter-master/js/jquery.tablesorter.widgets.js"></script>
-        <link rel="stylesheet" href="/tablesorter-master/css/theme.blue.css"/>
-        <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>';
-        } else {
-            echo '<script type="text/javascript" src="/webengii/webengii/tablesorter-master/js/jquery.tablesorter.js"></script> 
-        <link rel="stylesheet" type="text/css" href="/webengii/webengii/bootstrap/css/bootstrap.min.css"/>
-        <script src="/webengii/webengii/tablesorter-master/js/jquery.tablesorter.widgets.js"></script>
-        <link rel="stylesheet" href="/webengii/webengii/tablesorter-master/css/theme.blue.css"/>
-        <script type="text/javascript" src="/webengii/webengii/bootstrap/js/bootstrap.js"></script>';
-        }
+        require 'links.php';
+        require 'connectfile.php';
         try {
-            if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
-                $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
-                $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
-                $dbuser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
-                $dbPass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
-            } else { // localhost
-                $dbuser = 'aNewUser';
-                $dbPass = 'password';
-                $dbHost = '127.0.0.1';
-            }
-            $dbName = 'iron_man';
-            $db = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbuser, $dbPass);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $query = "SELECT semester FROM events"
                     . " ORDER BY RIGHT(semester, 2)";
         } catch (PDOException $ex) {

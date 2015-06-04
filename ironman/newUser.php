@@ -5,18 +5,7 @@
  * storing the users id number on their system so that each user is recognized by their device.
  */
 
-if (getenv('OPENSHIFT_MYSQL_DB_HOST')) { // openshift
-    $dbHost = getenv('OPENSHIFT_MYSQL_DB_HOST');
-    $dbPort = getenv('OPENSHIFT_MYSQL_DB_PORT');
-    $dbuser = getenv('OPENSHIFT_MYSQL_DB_USERNAME');
-    $dbPass = getenv('OPENSHIFT_MYSQL_DB_PASSWORD');
-} else { // localhost
-    $dbuser = 'insertIronman';
-    $dbPass = 'password';
-    $dbHost = '127.0.0.1';
-}
-$dbname = 'iron_man';
-$username = null;
+require 'connectfile.php';
 
 
 if (isset($_GET['username'])) {
@@ -24,16 +13,12 @@ if (isset($_GET['username'])) {
 }
 
 try {
-    $db = new PDO("mysql:host=$dbHost;dbname=$dbname", $dbuser, $dbPass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //determine if the user has specified a display name or not
     if (!isset($username)) {
         $query = "INSERT INTO contestants (register_date)
  VALUES(CURDATE());";
-    } 
-    
-    else {
+    } else {
         $query = "INSERT INTO contestants (register_date, u_name)
  VALUES(CURDATE(), :username);";
     }
