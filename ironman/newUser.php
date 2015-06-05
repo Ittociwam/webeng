@@ -12,6 +12,17 @@ if (isset($_GET['username'])) {
     $username = $_GET['username'];
 }
 
+function validateUserName($username){
+    // where are we posting to?
+$url = 'getContestants.php';
+
+// what post fields?
+$fields = array(
+   'semester' => $field1,
+   'field2' => $field2,
+);
+}
+
 try {
 
     //determine if the user has specified a display name or not

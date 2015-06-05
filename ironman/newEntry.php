@@ -6,27 +6,24 @@
  */
 
 require 'connectfile.php';
+require 'getSemester.php';
+
+function isJson($string) {
+    return ((is_string($string) &&
+            (is_object(json_decode($string)) ||
+            is_array(json_decode($string))))) ? true : false;
+}
+
 try {
     $mode = $_GET['mode'];
     $distance = $_GET['distance'];
     $date = $_GET['date'];
     $user = $_GET['user'];
 
-    //check and see if the event/semester is open for submitting entries
-    $getSemester = "SELECT * FROM events "
-            . "WHERE CURDATE() BETWEEN start_date AND end_date;";
-    $getSemesterStatement = $db->query($getSemester);
-    $getSemesterStatement->setFetchMode(PDO::FETCH_ASSOC);
-    $semester = $getSemesterStatement->fetch();
-    //if the query returns nothing
-    if ($semester == null) {
-        //there is no ironman compitition currently in progress
-        echo '{"code":1, "message": "Currently there is no ironman competition in progress. '
-        . 'Check with the activities office to find out when the next one starts!"}';
-        //if the date they are trying to submit for is outside of the current semesters open period
-    } else if ($date < $semester['start_date'] || $date > $semester['end_date']) {
-        //tell them!
-        echo '{"code":1, "message": "Your entry date is invalid for ' . $semester['semester'] . '."}';
+    $semester = @getSemester($date);
+    if(isJson($semester))
+    {
+        echo $semester;
     }
     // here i want to check if the user has passed any distance limits I will probably call getEntries.php to do this
     else {
