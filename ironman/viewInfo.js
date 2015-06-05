@@ -73,6 +73,8 @@ function displayContestants(data) {
             var username = "No Username";
             if (data[i].u_name != null)
                 username = data[i].u_name;
+            else
+                username = data[i].pk_contestants_id;
             out += "<tr> \n\
                         <td>" + username + "</td>" +
                        "<td>" + data[i].register_date + "</td>\n\

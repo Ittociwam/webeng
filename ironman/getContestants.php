@@ -6,7 +6,7 @@ try {
 $semester = $_POST['semester'];
 
 
-    $query = "SELECT c.u_name, c.register_date, (sum(en.distance) / 223) as percentage
+    $query = "SELECT c.pk_contestants_id, c.u_name, c.register_date, (sum(en.distance) / 223) as percentage
  FROM entries en
  INNER JOIN events e
  ON en.fk_events = e.pk_events_id
