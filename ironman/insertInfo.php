@@ -4,8 +4,6 @@
         <title>DB access</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
         <?php
         require 'links.php';
         ?>
@@ -50,16 +48,16 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Your device is not in our system! Would you like a Username?</h4>
+                        <h4 id="unameModalTitle" class="modal-title">Your device is not in our system! Would you like a Username?</h4>
                     </div>
                     <div class="modal-body">
                         <div class=" form-group col-lg-12">
-                            <input id='userName' type="text" placeholder='Enter a Username here.' class="form-control" >
+                            <input id='userName' type="text" autofocus placeholder='Enter a Username here.' class="form-control" >
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick='createNewUser(null)' class=" modalSubmit btn btn-default" data-dismiss="modal">I'm OK with being just an ID number</button>
-                        <button type="button" onclick='createNewUser($("#userName").val())' data-dismiss="modal" class=" modalSubmit btn btn-primary">Sure</button>
+                        <button type="button" id="submitNum" class=" modalSubmit btn btn-default">I'm OK with being just an ID number</button>
+                        <button type="button" id="submitUname" class=" modalSubmit btn btn-primary">Sure</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -83,6 +81,7 @@
                 </div>
             </div>
         </div>
+        
 
     </body>
 </html>

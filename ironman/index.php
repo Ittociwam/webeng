@@ -6,16 +6,8 @@ and open the template in the editor. I am in a new branch????????
 -->
 <html>
     <head>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <?php
-        if (getenv('OPENSHIFT_MYSQL_DB_HOST')) {
-            echo '<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
-                <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>';
-        } else {
-            echo '<link rel="stylesheet" type="text/css" href="/webengii/webengii/bootstrap/css/bootstrap.min.css"/>
-        <script type="text/javascript" src="/webengii/webengii/bootstrap/js/bootstrap.js"></script>';
-        }
+                <?php
+        require 'links.php';
         ?>
         <link type="text/css" rel="stylesheet" href="ironman.css"/>
     </head>

@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <?php
+        require 'links.php';
+        ?>
         <script>
             $(document).ready(function () {
                 $('#start_date').datepicker({
@@ -16,9 +17,7 @@
                 });
             });
         </script>
-        <?php
-        require 'links.php';
-        ?>
+
     </head>
     <body>
         <div class='well row'>
