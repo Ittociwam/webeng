@@ -90,6 +90,7 @@ function submitEntry() {
     console.log("newEntry url = " + url);
 
     jQuery.get(url, function (data) {
+        console.log(data);
         var parsedData = JSON.parse(data);
         console.log("pasred json from submit entry" + parsedData.message);
         $("#unameModal").modal('hide'); // if everything has gone ok up to this point we can replace the uname modal
