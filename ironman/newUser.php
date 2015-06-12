@@ -15,7 +15,7 @@ function isDuplicate($username, $semester) {
     if ($dup->rowCount() > 0) {
         return true;
     }
-    return false;
+    return false; // this is branch
 }
 
 //sends the information to the database
@@ -50,8 +50,9 @@ if (isJson($semester)) { // first off we check to see if there is even an event 
     try {
         //determine if the user has specified a display name or not
         if ($username == 'null') {
-            $query = "INSERT INTO contestants (register_date)
- VALUES(CURDATE());";
+            $query = "INSERT INTO contestants (register_date) 
+                      VALUES(CURDATE());";
+
             $update = "UPDATE contestants "
                     . "SET u_name = :lastInsertId1 "
                     . "WHERE pk_contestants_id = :lastInsertId2 ";
@@ -61,7 +62,7 @@ if (isJson($semester)) { // first off we check to see if there is even an event 
         } else {
 
             $query = "INSERT INTO contestants (register_date, u_name)
- VALUES(CURDATE(), :username);";
+                      VALUES(CURDATE(), :username);";
             runInsert($query, $username);
         }
     } catch (PDOEXCEPTION $ex) {
