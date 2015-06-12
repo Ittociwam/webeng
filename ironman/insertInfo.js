@@ -58,7 +58,7 @@ function createNewUser(username) {
 
     // ajax call to newUser.php 
     jQuery.get(url, function (data) {
-        if (!isNaN(data))
+        if (data.length == 13) // this is a poor way to check if it's a uniqid...
         {
             console.log("succesfully created new user: " + data);
             localStorage.setItem("user", data);

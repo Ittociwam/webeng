@@ -13,6 +13,7 @@ define('RUN', 2);
 define('SWIM', 3);
 
 function validateDistance(&$message, $distance, $totalDistance, $mode, $modeMiles){
+    //echo "distance: $distance Totaldistance: $totalDistance ";
     if($totalDistance == null){
         $totalDistance = 0.0;
     }
@@ -33,7 +34,9 @@ function validateDistance(&$message, $distance, $totalDistance, $mode, $modeMile
 
 function checkIsFinished(&$message, $user, $modeNum, $semester, $distance){ // message is by reference so we can alter it at any moment
     require 'connectfile.php'; 
-    $query = "SELECT SUM(e.distance) as totalDistance 
+    //echo "user: $user modenum: $modeNum semester: $semester distance: $distance";
+
+$query = "SELECT SUM(e.distance) as totalDistance 
     FROM contestants c
     INNER JOIN entries e
     ON e.fk_contestants = c.pk_contestants_id
@@ -94,11 +97,17 @@ try {
         $pk_events_id = $semester['pk_events_id']; // pull out the event_id from the semester row.
 
         // check if the user has a registration for the event they are submitting for
-        $checkRegistration = "SELECT * from registration"
-        . " WHERE fk_contestants = $user"
-        . " AND fk_events = $pk_events_id;";
+        $checkRegistration = "SELECT * from registration as r"
+        ."INNER JOIN contestants as c "
+        ."ON pk_contestants_id = fk_contestants "
+        ."WHERE pk_contestants_id = :user "
+        ."AND fk_events = :pkevents ";
 
-        $checkRegistrationStatement = $db->query($checkRegistration);
+        //$checkRegistrationStatement = $db->query($checkRegistration);
+        $checkRegistrationStatement = $db->prepare($checkRegistration);
+        $checkRegistrationStatement->bindValue(':user', $user);
+        $checkRegistrationStatement->bindValue(':pkevents', $pk_events_id);
+        $checkRegistrationStatement->execute();
         $checkRegistrationStatement->setFetchMode(PDO::FETCH_ASSOC);
         $registration = $checkRegistrationStatement->fetch();
 

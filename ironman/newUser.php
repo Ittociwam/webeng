@@ -15,25 +15,28 @@ function isDuplicate($username, $semester) {
     if ($dup->rowCount() > 0) {
         return true;
     }
-    return false; // this is branch
+    return false;
 }
 
 //sends the information to the database
 function runInsert($query, $username, $update = null) {
+    $uniqid = uniqid();
     require 'connectfile.php';
     $statement = $db->prepare($query);
+
+    $statement->bindValue(':uniqid', $uniqid);
     $statement->bindValue(':username', $username);
     $statement->execute();
 
-    echo $db->lastInsertId();
+    echo $uniqid;
     
     // this was a little hack I had to do to insert the user id as the contestants
     // username if they
     if (isset($update)) {
 
         $stmt = $db->prepare($update);
-        $stmt->bindValue(':lastInsertId1', $db->lastInsertId());
-        $stmt->bindValue(':lastInsertId2', $db->lastInsertId());
+        $stmt->bindValue(':uniqid1', $uniqid);
+        $stmt->bindValue(':uniqid2', $uniqid);
         $stmt->execute();
     }
 }
@@ -50,19 +53,19 @@ if (isJson($semester)) { // first off we check to see if there is even an event 
     try {
         //determine if the user has specified a display name or not
         if ($username == 'null') {
-            $query = "INSERT INTO contestants (register_date) 
-                      VALUES(CURDATE());";
+            $query = "INSERT INTO contestants (pk_contestants_id, register_date) 
+                      VALUES(:uniqid CURDATE());";
 
             $update = "UPDATE contestants "
-                    . "SET u_name = :lastInsertId1 "
-                    . "WHERE pk_contestants_id = :lastInsertId2 ";
+                    . "SET u_name = :uniqid1 "
+                    . "WHERE pk_contestants_id = :uniqid2 ";
             runInsert($query, $username, $update);
         } else if (isDuplicate($username, $semester['semester'])) {
             echo "duplicate";
         } else {
 
-            $query = "INSERT INTO contestants (register_date, u_name)
-                      VALUES(CURDATE(), :username);";
+            $query = "INSERT INTO contestants (pk_contestants_id, register_date, u_name)
+                      VALUES(:uniqid ,CURDATE(), :username);";
             runInsert($query, $username);
         }
     } catch (PDOEXCEPTION $ex) {
